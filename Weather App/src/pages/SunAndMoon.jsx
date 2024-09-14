@@ -4,10 +4,11 @@ import { useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import Header from '../shared/Header';
+import Footer from '../shared/Footer';
 
 const ForecastDay = ({ forecastsky, date }) => {
     return (
-        <div>
+        <div className='overflow-auto'>
             <table className='table'>
                 <thead>
                     <tr>
@@ -50,44 +51,58 @@ const SunAndMoon = () => {
     };
 
     return (
-        <div data-theme='pastel'>
+        <div data-theme='night'>
             <Header />
             <main>
-                <div>
-                    <form>
-                        <label>
-                            <span>Enter your location</span>
+                <div className='grid grid-cols-1 grid-rows-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
+                    <form className='lg:col-span-2 md:col-start-2 lg:col-start-2'>
+                        <label className='grid grid-cols-1 gap-2 items-center form-control'>
+                            <div className='label'>
+                                <span className='label-text'>
+                                    Enter your location
+                                </span>
+                                <span className='label-text-alt text-info'>
+                                    City, province, country
+                                </span>
+                            </div>
                             <input
                                 type='text'
                                 value={location}
                                 onChange={(e) => setLocation(e.target.value)}
-                                id='location'
+                                className='input input-bordered input-primary'
                             />
                         </label>
-                        <button onClick={(e) => handleSubmit(e)}>Submit</button>
                     </form>
+                    <button
+                        onClick={(e) => handleSubmit(e)}
+                        className='lg:col-span-2 md:col-start-2 lg:col-start-2 btn btn-primary'
+                    >
+                        Submit
+                    </button>
                 </div>
                 <div>
                     {response ? (
                         <>
-                            <div>
-                                <p>
-                                    <span>Name: </span>
-                                    {response.location.name}
-                                </p>
-                                <p>
-                                    <span>Region: </span>
-                                    {response.location.region}
-                                </p>
-                                <p>
-                                    <span>Country: </span>
-                                    {response.location.country}
-                                </p>
-                                <p>
-                                    <span>Current Local Time: </span>
-                                    {response.location.localtime}
-                                </p>
-                            </div>
+                            <table className='table'>
+                                <tr>
+                                    <th className='text-end'>Name</th>
+                                    <td>{response.location.name}</td>
+                                </tr>
+                                <tr>
+                                    <th className='text-end'>Region</th>
+                                    <td>{response.location.region}</td>
+                                </tr>
+                                <tr>
+                                    <th className='text-end'>Country</th>
+                                    <td>{response.location.country}</td>
+                                </tr>
+                                <tr>
+                                    <th className='text-end'>
+                                        Current Local Time
+                                    </th>
+                                    <td>{response.location.localtime}</td>
+                                </tr>
+                            </table>
                             <div>
                                 {response.forecast.forecastday.map((day) => (
                                     <ForecastDay
@@ -101,6 +116,7 @@ const SunAndMoon = () => {
                     ) : null}
                 </div>
             </main>
+            <Footer />
         </div>
     );
 };

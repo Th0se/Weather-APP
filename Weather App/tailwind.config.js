@@ -12,7 +12,7 @@ export default {
         extend: {},
     },
     daisyui: {
-        themes: ['pastel'],
+        themes: ['pastel', 'luxury', 'night'],
     },
     plugins: [daisyUI, tailwindTypography],
 };

@@ -72,11 +72,11 @@ const SunAndMoonButton = () => {
 
 const Header = () => {
     return (
-        <header className='relative grid grid-rows-2 z-50 border-2 border-accent'>
+        <header className='bg-neutral'>
             <div className='prose max-w-none'>
                 <h1 className='text-center p-4'>Hawa</h1>
             </div>
-            <div className='navbar grid grid-cols-4 gap-4'>
+            <div className='navbar grid lg:grid-cols-4 md:grid-cols-2 gap-4'>
                 <KeyButton />
                 <WeatherButton />
                 <AirButton />
