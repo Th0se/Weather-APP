@@ -4,9 +4,9 @@ import { useState } from 'react';
 import Header from '../shared/Header';
 import Footer from '../shared/Footer';
 
-const Key = () => {
-    const [newKey, setNewKey] = useState('');
-    const handleSubmit = async (event) => {
+const Key: React.FunctionComponent = () => {
+    const [newKey, setNewKey] = useState<string>('');
+    const handleSubmit = async (event: React.MouseEvent | React.TouchEvent) => {
         event.preventDefault();
         localStorage.setItem('key', newKey);
     };

@@ -2,11 +2,26 @@
 
 import { useState } from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 import Header from '../shared/Header';
 import Footer from '../shared/Footer';
+import { WeatherDataResponse } from './interfaces/response';
 
-const ForecastDay = ({ forecastsky, date }) => {
+type ForecastDayPropType = {
+    date: string;
+    forecastsky: {
+        sunrise: string;
+        sunset: string;
+        moonrise: string;
+        moonset: string;
+        moon_phase: string;
+        moon_illumination: number;
+    };
+};
+
+const ForecastDay: React.FunctionComponent<ForecastDayPropType> = ({
+    forecastsky,
+    date,
+}) => {
     return (
         <div className='overflow-auto'>
             <table className='table'>
@@ -37,12 +52,12 @@ const ForecastDay = ({ forecastsky, date }) => {
     );
 };
 
-const SunAndMoon = () => {
-    const [location, setLocation] = useState('');
-    const [response, setResponse] = useState('');
+const SunAndMoon: React.FunctionComponent = () => {
+    const [location, setLocation] = useState<string>('');
+    const [response, setResponse] = useState<WeatherDataResponse | ''>('');
     const key = localStorage.getItem('key');
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event: React.MouseEvent | React.TouchEvent) => {
         event.preventDefault();
         const target = `http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${location}&days=3&aqi=yes&alerts=yes`;
         const response = await axios.get(target);
@@ -119,11 +134,6 @@ const SunAndMoon = () => {
             <Footer />
         </div>
     );
-};
-
-ForecastDay.propTypes = {
-    forecastsky: PropTypes.object.isRequired,
-    date: PropTypes.string.isRequired,
 };
 
 export default SunAndMoon;
