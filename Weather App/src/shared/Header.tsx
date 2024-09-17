@@ -36,23 +36,6 @@ const WeatherButton = () => {
     );
 };
 
-const AirButton = () => {
-    // Button to go the the 'Air' page.
-    return (
-        <NavLink
-            to='/air'
-            title='Go to "air" page.'
-            className={({ isActive }) =>
-                isActive
-                    ? 'btn btn-secondary btn-active navbar-center'
-                    : 'btn btn-secondary navbar-center'
-            }
-        >
-            Air
-        </NavLink>
-    );
-};
-
 const SunAndMoonButton = () => {
     // Button to go the the 'SunAndMoon' page.
     return (
@@ -76,10 +59,9 @@ const Header = () => {
             <div className='prose max-w-none'>
                 <h1 className='text-center p-4'>Hawa</h1>
             </div>
-            <div className='navbar grid lg:grid-cols-4 md:grid-cols-2 gap-4'>
+            <div className='navbar grid md:grid-cols-3 gap-4'>
                 <KeyButton />
                 <WeatherButton />
-                <AirButton />
                 <SunAndMoonButton />
             </div>
         </header>
