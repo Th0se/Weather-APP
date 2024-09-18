@@ -2,7 +2,7 @@
 
 A simple interface to serve information provided by WeaterAPI in an easy-to-digest format.
 
-# Guidelines.
+# Developer Guidelines.
 
 ## General
 
@@ -33,3 +33,8 @@ Examples:
 
 `4.5.6` => `5.0.0`.
 `1.2.3.` => `1.3.0`.
+
+
+# User guideline.
+
+Before using the forecast features, API key should be entered in the `key` page. The key will be stored in your browser's local storage. With the key stored, you can use forecast pages to request forecasts using your key. 
