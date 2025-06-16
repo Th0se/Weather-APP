@@ -1,0 +1,68 @@
+/** @format */
+@import 'tailwindcss';
+@plugin 'daisyui' {
+    themes: emerald --default, dark --prefersdark;
+}
+
+main {
+    @apply p-2;
+    @apply overflow-x-hidden;
+}
+
+h1 {
+    @apply text-[2rem] md:text-[4rem] lg:text-[5rem];
+}
+
+h2 {
+    @apply text-[1.75rem] md:text-[3rem] lg:text-[4rem];
+}
+
+h3 {
+    @apply text-[1.25rem] md:text-[2.5rem] lg:text-[3.5rem];
+}
+
+h4 {
+    @apply text-[1.25rem] md:text-[2rem] lg:text-[2.75rem];
+}
+
+h5 {
+    @apply text-[1rem] md:text-[1.5rem] lg:text-[2rem];
+}
+
+h6 {
+    @apply text-[0.875rem] md:text-[1.25rem] lg:text-[1.75rem];
+}
+
+/* Root-level, no wrapper — universal base type scale */
+p,
+a,
+span,
+li,
+label,
+input,
+textarea,
+select,
+button,
+div {
+    @apply text-[0.75rem] md:text-[1rem] lg:text-[1.25rem];
+}
+
+/* For reduced text like disclaimers, captions, helper notes */
+small,
+figcaption {
+    @apply text-[0.625rem] md:text-[0.75rem] lg:text-[1rem];
+}
+
+/* For preformatted or code blocks */
+code,
+kbd,
+pre,
+samp {
+    @apply text-[0.75rem] md:text-[0.875rem] lg:text-[1rem];
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        monospace;
+}
+
+tr {
+    @apply hover:bg-accent;
+}
