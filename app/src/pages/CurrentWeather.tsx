@@ -20,7 +20,7 @@ const Input: FunctionComponent<{
 }> = ({ apiKey, setInformation }) => {
     const [address, setAddress] = useState('Semarang, Central Java, Indonesia');
     const handlePredict = async () => {
-        const target = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${address}&days=3&aqi=yes&alerts=yes`;
+        const target = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${address}aqi=yes`;
         const response = await axios.get(target);
         setInformation(response.data);
         console.log(response.data);

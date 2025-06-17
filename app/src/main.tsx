@@ -7,10 +7,12 @@ import './index.css';
 
 const Key = lazy(() => import('./pages/Key'));
 const WeatherAlert = lazy(() => import('./pages/CurrentWeather'));
+const Forecast = lazy(() => import('./pages/Forecast'));
 
 const router = createBrowserRouter([
     { path: '/key', element: <Key /> },
     { path: '/current_weather', element: <WeatherAlert /> },
+    { path: '/weather_forecast', element: <Forecast /> },
 ]);
 
 const rootElement = document.getElementById('root');
