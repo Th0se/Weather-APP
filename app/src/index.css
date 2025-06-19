@@ -1,7 +1,7 @@
 /** @format */
 @import 'tailwindcss';
 @plugin 'daisyui' {
-    themes: emerald --default, dark --prefersdark;
+    themes: nord --default, luxury --prefersdark;
 }
 
 main {

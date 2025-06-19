@@ -195,7 +195,6 @@ const CurrentWeatherGrouped: FunctionComponent<{ data: Current }> = ({
                     </div>
                 </div>
             </div>
-
             <div className='lg:grid lg:grid-cols-3 gap-2'>
                 <div>
                     <h1 className='text-center'>Breath</h1>
@@ -299,9 +298,9 @@ const Information: FunctionComponent<{ data: WeatherDataResponse }> = ({
             <div>
                 <button
                     onClick={() => toggleDense()}
-                    className='btn btn-soft py-2'
+                    className='btn btn-secondary py-2'
                 >
-                    {dense ? 'Switch to spread view' : 'Switch to dense view'}
+                    {dense ? 'Switch to easy view' : 'Switch to dense view'}
                 </button>
             </div>
             <div>

@@ -44,7 +44,7 @@ export interface Forecast {
 }
 
 export interface Forecastday {
-    date: Date;
+    date: string;
     day: Day;
     astro: Astro;
     hour: Hour[];

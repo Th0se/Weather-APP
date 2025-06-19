@@ -203,7 +203,8 @@ const ForecastDayDense: FunctionComponent<{ data: Forecastday }> = ({
     const hours: Hour[] = data.hour;
 
     return (
-        <div className='p-2'>
+        <div className='p-2 grid gap-4'>
+            <h1>{data.date}</h1>
             <table className='table border-solid border-2 border-accent'>
                 <thead>
                     <tr>
@@ -317,7 +318,7 @@ const ForecastDayDense: FunctionComponent<{ data: Forecastday }> = ({
                     </tr>
                 </tbody>
             </table>
-            <div>
+            <div className='p-2 grid gap-4'>
                 {hours.map((hour) => {
                     return (
                         <ForecastHourDense
@@ -347,41 +348,35 @@ const ForecastDense: FunctionComponent<{ data: Forecast }> = ({ data }) => {
     );
 };
 
-/*
-Dashboard for weather forecast.
-Grouped version.
-This version serves the same information as the dense version, but this version breaks apart the information
-inro multiple divs to make it less overwhelming to read.
-*/
-const ForecastGrouped: FunctionComponent<{ data: Forecast }> = ({ data }) => {
-    const lastUpdate = data.last_updated;
+// Hourly table for weather forecast.
+// Easy/gruped version
+const ForecastHourGrouped: FunctionComponent<{ data: Hour }> = ({ data }) => {
+    const time = data.time;
+    const temperature = data.temp_c;
     const condition: Condition = data.condition;
-    const temp = data.temp_c;
     const wind = data.wind_kph;
+    const windDir = data.wind_dir;
     const pressure = data.pressure_mb;
     const humidity = data.humidity;
     const cloud = data.cloud;
-    const vis = data.vis_km;
-    const uv = data.uv;
+    const heatindex = data.heatindex_c;
+    const visualRange = data.vis_km;
+    const chanceOfRain = data.chance_of_rain;
+    const chanceOfSnow = data.chance_of_snow;
     const gust = data.gust_kph;
+    const uv = data.uv;
 
     return (
-        <div className='p-2'>
-            <div className='lg:grid lg:grid-cols-3'>
-                <div className='grid grid-rows-2 col-start-2 justify-center'>
-                    <strong>{lastUpdate}</strong>
-                    <div className='grid justify-center'>
-                        <img
-                            src={condition.icon}
-                            alt={condition.text}
-                        />
-                    </div>
+        <div className='p-2 bg-secondary border rounded-lg'>
+            <div className=''>
+                <h2>{time.substring(11, 16)}</h2>
+                <div>
+                    <img src={condition.icon} />
                 </div>
             </div>
-
-            <div className='lg:grid lg:grid-cols-3 gap-2'>
+            <div className='grid lg:grid-cols-3 gap-2'>
                 <div>
-                    <h1 className='text-center'>Breath</h1>
+                    <h3 className='text-center'>Breath</h3>
                     <table className='table border-solid border-2 border-accent'>
                         <thead>
                             <tr>
@@ -392,13 +387,15 @@ const ForecastGrouped: FunctionComponent<{ data: Forecast }> = ({ data }) => {
                         </thead>
                         <tbody>
                             <tr>
-                                <th>Air Temperature</th>
-                                <td>{temp}</td>
+                                <th>Temperature</th>
+                                <td>{temperature}</td>
                                 <td>&deg;C</td>
                             </tr>
                             <tr>
                                 <th>Wind Speed</th>
-                                <td>{wind}</td>
+                                <td>
+                                    {wind} {windDir}
+                                </td>
                                 <td>km/h</td>
                             </tr>
                             <tr>
@@ -410,7 +407,7 @@ const ForecastGrouped: FunctionComponent<{ data: Forecast }> = ({ data }) => {
                     </table>
                 </div>
                 <div>
-                    <h1 className='text-center'>Weight</h1>
+                    <h3 className='text-center'>Weight</h3>
                     <table className='table border-solid border-2 border-accent'>
                         <thead>
                             <tr>
@@ -432,14 +429,19 @@ const ForecastGrouped: FunctionComponent<{ data: Forecast }> = ({ data }) => {
                             </tr>
                             <tr>
                                 <th>Visibility</th>
-                                <td>{vis}</td>
-                                <td>Km</td>
+                                <td>{visualRange}</td>
+                                <td>km</td>
+                            </tr>
+                            <tr>
+                                <th>Heat Index</th>
+                                <td>{heatindex}</td>
+                                <td>&deg;C</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div>
-                    <h1 className='text-center'>Above</h1>
+                    <h3 className='text-center'>Above</h3>
                     <table className='table border-solid border-2 border-accent'>
                         <thead>
                             <tr>
@@ -450,19 +452,103 @@ const ForecastGrouped: FunctionComponent<{ data: Forecast }> = ({ data }) => {
                         </thead>
                         <tbody>
                             <tr>
-                                <th>UV Index</th>
-                                <td>{uv}</td>
-                                <td></td>
-                            </tr>
-                            <tr>
                                 <th>Cloud Cover</th>
                                 <td>{cloud}</td>
                                 <td>%</td>
+                            </tr>
+                            <tr>
+                                <th>Chance of Rain</th>
+                                <td>{chanceOfRain}</td>
+                                <td>%</td>
+                            </tr>
+                            <tr>
+                                <th>Change of Snow</th>
+                                <td>{chanceOfSnow}</td>
+                                <td>%</td>
+                            </tr>
+                            <tr>
+                                <th>UV Index</th>
+                                <td>{uv}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+        </div>
+    );
+};
+
+/* 
+Daily table for weather forecast.
+Grouped version. This versions serves less information than the dense version does,
+and the information is broken up into multiple divs to make it less overwhelming to read.
+*/
+
+const ForecastDayGrouped: FunctionComponent<{ data: Forecastday }> = ({
+    data,
+}) => {
+    const astro: Astro = data.astro;
+    const hours: Hour[] = data.hour;
+
+    return (
+        <div className='p-2 grid gap-4'>
+            <h1>{data.date}</h1>
+            <div className='p-2 bg-secondary border rounded-lg'>
+                <h2>Astro</h2>
+                <table className='table border-solid border-2 border-accent'>
+                    <thead>
+                        <tr>
+                            <th>Label</th>
+                            <th>Value</th>
+                            <th>Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Sunrise</th>
+                            <td>{astro.sunrise}</td>
+                        </tr>
+                        <tr>
+                            <th>Sunset</th>
+                            <td>{astro.sunset}</td>
+                        </tr>
+                        <tr>
+                            <th>Moon Phase</th>
+                            <td>{astro.moon_phase}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div className='grid gap-4'>
+                {hours.map((hour) => {
+                    return (
+                        <ForecastHourGrouped
+                            data={hour}
+                            key={hour.time}
+                        />
+                    );
+                })}
+            </div>
+        </div>
+    );
+};
+
+/*
+Dashboard for weather forecast.
+Grouped version.
+This version serves the same information as the dense version, but this version breaks apart the information
+inro multiple divs to make it less overwhelming to read.
+*/
+const ForecastGrouped: FunctionComponent<{ data: Forecast }> = ({ data }) => {
+    const firstDay: Forecastday = data.forecastday[0];
+    const secondDay: Forecastday = data.forecastday[1];
+    const thirdDay: Forecastday = data.forecastday[2];
+
+    return (
+        <div className='p-2 grid gap-6'>
+            <ForecastDayGrouped data={firstDay} />
+            <ForecastDayGrouped data={secondDay} />
+            <ForecastDayGrouped data={thirdDay} />
         </div>
     );
 };
@@ -482,9 +568,9 @@ const Information: FunctionComponent<{ data: WeatherDataResponse }> = ({
             <div>
                 <button
                     onClick={() => toggleDense()}
-                    className='btn btn-soft py-2'
+                    className='btn btn-secondary py-2'
                 >
-                    {dense ? 'Switch to spread view' : 'Switch to dense view'}
+                    {dense ? 'Switch to easy view' : 'Switch to dense view'}
                 </button>
             </div>
             <div>
